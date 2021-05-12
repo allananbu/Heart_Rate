@@ -12,7 +12,7 @@ import matplotlib.pyplot as plt
 thresh=0.5
 
 def get_hsv_mask(img):
-    thresh_low=np.array([0, 50,0],dtype=np.uint8)
+    thresh_low=np.array([0, 55,0],dtype=np.uint8)
     thresh_up=np.array([150, 150,255],dtype=np.uint8)
     img_hsv=cv2.cvtColor(img,cv2.COLOR_RGB2HSV)
     mask_hsv=cv2.inRange(img_hsv,thresh_low,thresh_up)
@@ -23,7 +23,7 @@ def get_hsv_mask(img):
     return mask_hsv.astype(float)
 
 def get_rgb_mask(img):
-    thresh_low=np.array([45,52,108],dtype=np.uint8)
+    thresh_low=np.array([50,55,108],dtype=np.uint8)
     thresh_up=np.array([255,255,255],dtype=np.uint8)
     
     mask_a=cv2.inRange(img,thresh_low,thresh_up)
