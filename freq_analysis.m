@@ -4,15 +4,16 @@ close all
 
 %%
 %Design filter for live run filter
-load('C:\Users\Allan\Desktop\JRF\Heart_Rate\Python\POS\pulse.mat')
+load('C:\Users\Allan\Desktop\JRF\Heart_Rate\Python\POS\Dataset_pulse_2.mat')
 % infra
-x_n=pulse;
+x_n=realpulse;
 figure(1)
 plot(x_n)
-
-Fs=13;
+x_n=movmean(x_n,8);
+Fs=25;
 x=x_n-mean(x_n);%Eliminate DC
 x=x-std(x);
+
 
 nfft=length(x);
 nfft2=2.^nextpow2(nfft);
@@ -24,9 +25,9 @@ figure(2)
 plot(xfft,(fy/max(fy)))
 
 %Define cut off frequency and calculate filter coefficients
-cut_off=1.7/Fs/2;
-order=50;
-h=fir1(order,cut_off,'high');
+cut_off=[0.5 4]/Fs/2;
+order=35;
+h=fir1(order,cut_off,'bandpass');
 
 con=filtfilt(h,1,x);
 figure(3)
