@@ -155,7 +155,6 @@ try:
     
     #Step 5: Overlap-Adding
             H[t:t+l-1] = H[t:t+l-1] +  (P-np.mean(P))/np.std(P)
-#        d=np.arange(0,H.shape[0])
 #        
 #        plt.plot(d,H,'c')
 #        plt.pause(0.0001)
