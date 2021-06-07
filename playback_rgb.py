@@ -19,8 +19,7 @@ rs.config.enable_device_from_file(config, "Record_resol_4.bag", repeat_playback=
 
 images=[]
 i = 0
-#Haar Classifier
-#face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_frontalface_default.xml')
+
 mean_all=[]
 frame_all=[]
 # Start streaming
