@@ -44,8 +44,6 @@ while count<end:
     if count==len(H):
         break
 
-#    h=frame.shape[0]
-#    w=frame.shape[1]
     
     gray=cv2.cvtColor(frame,cv2.COLOR_BGR2GRAY)
     faces=detector(gray,0)
