@@ -4,9 +4,9 @@ close all
 
 %%
 %Design filter for live run filter
-load('C:\Users\Allan\Desktop\JRF\Heart_Rate\Python\POS\Dataset_pulse_2.mat')
+load('C:\Users\Allan\Desktop\JRF\Heart_Rate\Python\POS\Dataset_talking.mat')
 % infra
-x_n=realpulse;
+x_n=realsense;
 figure(1)
 plot(x_n)
 x_n=movmean(x_n,8);
