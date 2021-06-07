@@ -29,8 +29,7 @@ H=np.zeros([1800])
 
 images=[]
 i = 0
-#Haar Classifier
-#face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_frontalface_default.xml')
+
 mean_all=[]
 frame_all=[]
 # Start streaming
