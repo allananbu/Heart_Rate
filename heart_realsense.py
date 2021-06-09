@@ -26,9 +26,18 @@ count=0
 fps=30
 
 H=np.zeros([1800])
+H_exp=np.zeros([1800])
 
 images=[]
+inter_beat=[]
+temp_beat=0
 i = 0
+diff=[]
+j=0
+k=0
+temp=np.zeros([2,1])
+alpha=0.2
+
 
 mean_all=[]
 frame_all=[]
@@ -146,11 +155,33 @@ try:
                 y=a*P            
             except:
                 continue
+            
     
     #Step 5: Overlap-Adding
             H[t:t+l-1] = H[t:t+l-1] +  (y-np.mean(y))/np.std(y)
 #        d=np.arange(0,H.shape[0])
-#        
+            #Peak detection - IBI
+        if k>=1:
+            #Single Exponential smoothing
+            H_exp[j]=alpha*H[j-1]+(1-alpha)*H_exp[j-1]
+            #Peak detection
+            con=np.sign((H_exp[j]-H_exp[j-1]))
+            
+            temp[1]=con
+            
+
+            if temp[0]!=temp[1]:
+                if temp[1]==-1:
+#                    peak=k-1
+                    inter_beat.append(k-1)
+            #Heart rate every 10 seconds
+            if not (j-l)%300 and count>=l:
+                heart_rate=6*(len(inter_beat)-temp_beat)
+                temp_beat=len(inter_beat)
+                print("heart rate",heart_rate)
+            j+=1
+        k+=1
+        temp[0]=temp[1]
 #        plt.plot(d,H,'c')
 #        plt.pause(0.0001)
     
@@ -161,7 +192,7 @@ try:
             cv2.destroyAllWindows()
             break        
         
-        print("frame number",frame_no)
+#        print("frame number",frame_no)
 except RuntimeError:
     print("There are no more frames left in the .bag file!")
 
@@ -171,5 +202,7 @@ finally:
     pipeline.stop()
 pulse=[sum(H[i:i+6])/6 for i in range(len(H)-6+1)]
 
-tot_time=np.linspace(0,int(count/fps),num=len(pulse))
-plt.plot(pulse)
+tot_time=np.linspace(0,int(count/fps),num=len(H_exp))
+inter_beat=np.array(inter_beat)
+plt.plot(tot_time,H_exp)
+plt.plot(tot_time[inter_beat],H_exp[inter_beat],'x')
