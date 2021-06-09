@@ -144,7 +144,7 @@ try:
             S = np.matmul(projection_matrix,Cn)
 
         
-            #tuning & conversion to 1-D signal
+            #Tuning & conversion to 1-D signal
             std = np.array([1,np.std(S[0,:])/np.std(S[1,:])])
         
 #        P = S[0,:]+(std*S[1,:])
