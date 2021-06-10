@@ -30,13 +30,14 @@ H_exp=np.zeros([1800])
 
 images=[]
 inter_beat=[]
+x=0
 temp_beat=0
 i = 0
 diff=[]
 j=0
 k=0
 temp=np.zeros([2,1])
-alpha=0.2
+alpha=0.18
 
 
 mean_all=[]
@@ -173,11 +174,14 @@ try:
             if temp[0]!=temp[1]:
                 if temp[1]==-1:
 #                    peak=k-1
-                    inter_beat.append(k-1)
+                    inter_beat[x]=k-1
+                    x=x+1
             #Heart rate every 10 seconds
-            if not (j-l)%300 and count>=l:
+            if not (j-l)>=1800 and count>=l:
                 heart_rate=6*(len(inter_beat)-temp_beat)
                 temp_beat=len(inter_beat)
+#                res=inter_beat
+#                heart_rate=
                 print("heart rate",heart_rate)
             j+=1
         k+=1
