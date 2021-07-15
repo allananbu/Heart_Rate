@@ -174,15 +174,15 @@ try:
             if temp[0]!=temp[1]:
                 if temp[1]==-1:
 #                    peak=k-1
-                    inter_beat[x]=k-1
-                    x=x+1
+                    inter_beat.append(k-1)
+#                    x=x+1
             #Heart rate every 10 seconds
             if not (j-l)>=1800 and count>=l:
                 heart_rate=6*(len(inter_beat)-temp_beat)
                 temp_beat=len(inter_beat)
 #                res=inter_beat
 #                heart_rate=
-                print("heart rate",heart_rate)
+#                print("heart rate",heart_rate)
             j+=1
         k+=1
         temp[0]=temp[1]
@@ -196,7 +196,7 @@ try:
             cv2.destroyAllWindows()
             break        
         
-#        print("frame number",frame_no)
+        print("frame number",frame_no)
 except RuntimeError:
     print("There are no more frames left in the .bag file!")
 
